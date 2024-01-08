@@ -1,37 +1,35 @@
-FUNCTION f_is_palindrome(ch : STRING, VAR i,j : INTEGER) : BOOLEAN
+FUNCTION f_is_palindrome(ch : STRING) : BOOLEAN
 VAR
-    test : BOOLEAN;
-BEGIN
+    i,j:INTEGER;
+    new_ch:STRING;
 
-    IF (i=j) OR (i>j) THEN
-        test := true;
-    ELSE_IF (ch[i]=ch[j]) THEN
-        test := true;
-        test := f_is_palindrome(ch, i+1, j-1);
-    ELSE
-        test := false;
+BEGIN    //function's algorithm
+    j:= lenght.ch;
+    IF (j=0) OR (j=1) THEN
+        RETURN true;
     END_IF
 
-    RETURN test ;
+    IF (ch[0]=ch[j-1]) THEN
+        FOR i FROM 0 TO j-2 DO
+            new_ch[i]:=ch[i+1];
+        END_FOR
+        RETURN f_is_palindrome(new_ch);
+    ELSE
+        RETURN false;
+    END_IF
 END
 
-ALGORITHM is palindrome
-VAR
+ALGORITHM is palindrome  //algorithm'name
+VAR   //variable declaration
     word : STRING;
     test: BOOLEAN;
-    i, j : INTEGER;
 
-BEGIN
+BEGIN    //body's algorithm
     write("write the word, please!");
     read (word);
 
-    i:=0; j:= lenght.word;
+    test := f_is_palindrome (word);
 
-    IF (j=1) OR (j=0) THEN
-        test:= true; BREAK;
-    ELSE
-        test:= f_is_palindrome(word,i,j);
-    END_IF
 
     IF (test = true) THEN
         write("this word is a palindrome!");
